@@ -16,7 +16,6 @@ import Control.Monad.Trans.Resource (ResourceT)
 import Control.Monad.Trans.Writer (WriterT)
 import Data.Pool (Pool)
 import Data.Text (Text, unpack)
-import Data.Typeable (Typeable)
 
 import Database.Persist.Types
 import Database.Persist.Sql.Types.Internal
@@ -35,7 +34,7 @@ data Column = Column
 
 data PersistentSqlException = StatementAlreadyFinalized Text
                             | Couldn'tGetSQLConnection
-    deriving (Typeable, Show)
+    deriving Show
 instance Exception PersistentSqlException
 
 type SqlPersistT = ReaderT SqlBackend
@@ -143,7 +142,6 @@ newtype Single a = Single {unSingle :: a}
 -- @since 2.11.1.0
 newtype PersistUnsafeMigrationException
   = PersistUnsafeMigrationException [(Bool, Sql)]
-  deriving Typeable
 
 -- | This 'Show' instance renders an error message suitable for printing to the
 -- console. This is a little dodgy, but since GHC uses Show instances when

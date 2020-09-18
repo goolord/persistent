@@ -15,8 +15,12 @@
 * [#1063](https://github.com/yesodweb/persistent/pull/1063)
   * A new class member `keyFromRecordM` allows you to construct a `Key
     record` from a `record` if it was defined with `Primary`.
-* [#1036](https://github.com/yesodweb/persistent/pull/1036):
+* [#1036](https://github.com/yesodweb/persistent/pull/1036)
   * The method `entityIdFromJSON` that is used to parse entities now correctly works for entities that define a custom `Primary` key.
+* [#856](https://github.com/yesodweb/persistent/pull/856)
+  * Modify `upsertBy` to use backend-specific implementation (if any).
+* [#1066](https://github.com/yesodweb/persistent/pull/1066)
+  * You can set a column's `sql=id` for a non `Id` column.
 * Fix a bug where unsafe migration error messages were being shown using `Show` prior to printing, resulting in less helpful output. [#1080](https://github.com/yesodweb/persistent/pull/1080)
 * [#1087](https://github.com/yesodweb/persistent/pull/1087)
   * `RawSql` now has tuple instances up to GHC's max tuple size (62)
@@ -26,6 +30,16 @@
   * Add a new type `ConnectionPoolConfig` to configure the number of connections in a pool, their idle timeout, and stripe size.
   * Add `defaultConnectionPoolConfig` to create a `ConnectionPoolConfig`
   * Add `createSqlPoolWithConfig` and `withSqlPoolWithConfig`, which take this new data type
+* [#1076](https://github.com/yesodweb/persistent/pull/1076)
+  * `Loc` is now imported from `monad-logger` as opposed to `template-haskell`. Removes `template-haskell` as an explicit dependency.
+* [#1114](https://github.com/yesodweb/persistent/pull/1114)
+  * Remove unnecessary deriving of `Typeable`.
+* [#1127](https://github.com/yesodweb/persistent/pull/1127)
+  * Remove deriving of `Show` for uniques. Users that need a `Show` instance can put a standalone deriving instance:
+
+    ```haskell
+    deriving stock instance Show (Unique User)
+    ```
 
 ## 2.10.5.2
 
