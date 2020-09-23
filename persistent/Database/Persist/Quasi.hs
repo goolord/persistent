@@ -887,6 +887,7 @@ takeUniq ps tableName defs (n:rest)
             (x : _) -> Just (DBName x)
             _ -> Nothing
     dbName = fromMaybe usualDbName sqlName
+    getDBName :: [FieldDef] -> Text -> DBName
     getDBName [] t =
       error $ "Unknown column in unique constraint: " ++ show t
               ++ " " ++ show defs ++ show n ++ " " ++ show attrs

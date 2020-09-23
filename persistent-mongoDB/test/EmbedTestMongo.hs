@@ -20,6 +20,7 @@ import Data.List.NonEmpty hiding (insert, length)
 import qualified Data.Map as M
 import qualified Data.Set as S
 import qualified Data.Text as T
+import Data.Time.Clock (UTCTime(..))
 import Database.MongoDB (genObjectId)
 import Database.MongoDB (Value(String))
 import System.Process (readProcess)
@@ -159,6 +160,10 @@ mkPersist persistSettings [persistUpperCase|
   -- This failes
   -- SelfDirect
   --  reference SelfDirect
+  
+  Person
+    name Text
+    updatedAt UTCTime autoUpdate="$currentDate { updatedAt: true }"
 |]
 
 cleanDB :: (PersistQuery backend, PersistEntityBackend HasMap ~ backend, MonadIO m) => ReaderT backend m ()
